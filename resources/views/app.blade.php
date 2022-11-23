@@ -16,6 +16,9 @@
 
 <body>
     @inertia
+    <script>
+        localStorage.clear();
+    </script>
 </body>
 
 </html>

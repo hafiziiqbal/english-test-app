@@ -19,4 +19,4 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
-Route::get('tes/{mulai?}', [TesController::class, 'index']);
+Route::get('tes/', [TesController::class, 'index']);

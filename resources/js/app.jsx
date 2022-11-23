@@ -12,28 +12,25 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import React from 'react'
-import { render } from 'react-dom'
-import { createInertiaApp } from '@inertiajs/inertia-react'
 import { InertiaProgress } from '@inertiajs/progress'
-import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { createInertiaApp } from '@inertiajs/inertia-react'
+import React from 'react'
+import ReactDOM from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
-
+const app = ReactDOM.createRoot(document.getElementById("app"));
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.jsx`,
-            import.meta.glob("./Pages/**/*.jsx")
-        ),
+    resolve: name => import(`./Pages/${name}`),
     setup({ el, App, props }) {
-        return render(<App {...props} />, el);
-    },
-});
+        app.render(
 
-// you can specify any color of choice
-InertiaProgress.init({ color: "#4B5563" });
+            <App {...props} />
+        );
+    },
+})
+
+InertiaProgress.init({
+    color: '#29d',
+    showSpinner: true,
+});

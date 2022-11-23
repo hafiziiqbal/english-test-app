@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TesController extends Controller
 {
-    public function index($mulai = 1)
+    public function index()
     {
         $soalJson = [
             [
@@ -38,7 +38,7 @@ class TesController extends Controller
             ],
             [
                 "id" => 3,
-                "tipe" => "Structure",
+                "tipe" => "structure",
                 "panduan" => "Bacalah Dengan Paragraf dengan seksama dan isilah jawaban yang menurut anda paling benar ",
                 "soal" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit sit beatae consequuntur accusantium quasi pariatur veritatis officiis at aperiam.",
                 "paragraf" => "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, animi fuga laudantium tempore reprehenderit cumque officiis, similique fugit quaerat saepe labore dolorum ullam id. Voluptatibus aut velit veniam rem ipsam similique fugiat ullam excepturi eligendi dolorem aliquid sunt maxime natus consequatur tempore id sit assumenda, aperiam nesciunt sequi praesentium cupiditate.",
@@ -51,10 +51,10 @@ class TesController extends Controller
             ],
             [
                 "id" => 4,
-                "tipe" => "Structure",
+                "tipe" => "structure",
                 "panduan" => "Bacalah Dengan Paragraf dengan seksama dan isilah bagian yang kosong dengan jawaban paling benar ",
                 "soal" => "",
-                "paragraf" => "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, animi fuga laudantium tempore reprehenderit cumque officiis, similique fugit quaerat saepe labore dolorum ullam id. Voluptatibus aut velit veniam rem ipsam similique fugiat ullam excepturi eligendi dolorem aliquid sunt maxime natus consequatur tempore id sit assumenda, aperiam nesciunt sequi praesentium cupiditate.",
+                "paragraf" => "Lorem ipsum dolor sit, <span class='fw-bold'>4.lorem ipsum .... web</span>. Quidem, animi fuga laudantium tempore reprehenderit cumque officiis, similique fugit quaerat saepe labore dolorum ullam id. Voluptatibus aut velit veniam rem ipsam similique fugiat ullam excepturi eligendi dolorem aliquid sunt maxime natus consequatur tempore id sit assumenda, aperiam nesciunt sequi praesentium cupiditate.",
                 "a" => "Lorem ipsum dolor sit amet.",
                 "b" => "Lorem ipsum dolor sit amet.",
                 "c" => "Lorem ipsum dolor sit amet.",
@@ -64,11 +64,12 @@ class TesController extends Controller
             ]
         ];
 
-        $dataTampil = $soalJson[($mulai - 1)];
+
 
         return Inertia::render('Tes', [
-            'nomor' => $mulai,
-            'data' => $dataTampil,
+            'data' => $soalJson,
+            'menit' => 90,
+            'totalIndexSoal' => count($soalJson) - 1
         ]);
     }
 }
