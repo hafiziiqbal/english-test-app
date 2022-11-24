@@ -35,10 +35,12 @@ const Tes = ({ data, menit, totalIndexSoal }) => {
                     `<label class = "form-check-label" for ="jawabanA${data.id}">` +
                     `${e}. ${data.a}</label > </div >`
                 );
+                if (data.id != undefined) {
+                    ReactSession.set(data.id, 'unset')
+                }
 
                 $(`#jawaban${e}${data.id}`).on("click", e => {
                     ReactSession.set(e.target.name, e.target.value)
-
                 });
             });
         }
@@ -78,6 +80,9 @@ const Tes = ({ data, menit, totalIndexSoal }) => {
         if (no == totalIndexSoal) {
             setNo(no)
             setObjectData(data[no])
+            if (confirm('Sebelum Keluar, Pastikan Semua Jawaban Anda Sudah Terisi Dengan Benar')) {
+                window.location = "/";
+            }
         } else {
             setNo(no + 1)
             setObjectData(data[no] + 1)
@@ -132,7 +137,7 @@ const Tes = ({ data, menit, totalIndexSoal }) => {
             <div className="row mt-3">
                 <div className="row">
                     <div className="col-6"> <button onClick={() => { goPrev(no, data, objectData) }} className="btn btn-secondary">Previous</button></div>
-                    <div className="col-6 d-flex justify-content-end"> <button onClick={() => { goNext(no, data, totalIndexSoal, objectData) }} className="btn btn-secondary">Next</button></div>
+                    <div className="col-6 d-flex justify-content-end"> <button onClick={() => { goNext(no, data, totalIndexSoal, objectData) }} className="btn btn-secondary">{no == totalIndexSoal ? 'Finish Attempt' : 'Next'}</button></div>
                 </div>
 
             </div>
