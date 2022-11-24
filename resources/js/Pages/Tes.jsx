@@ -48,18 +48,21 @@ const Tes = ({ data, menit, totalIndexSoal }) => {
 
     const playAudio = (data) => {
         $("#contAudio").empty()
-        if (data.tipe == 'listening' && ReactSession.get(`audio${data.id}`) != false) {
+        if (data.tipe == 'listening') {
             $('#soalCOnt').addClass('d-none')
-            $("#contAudio").append(
-                `<audio id="Audio" src=${data.soal}>` +
-                `</audio>` +
-                `<button id="btnPlay" type="button">Play Audio</button>`
-            );
-            $(`#btnPlay`).on("click", e => {
-                ReactSession.set(`audio${data.id}`, false)
-                $(`#Audio`).get(0).play()
-                e.target.remove()
-            });
+            if (ReactSession.get(`audio${data.id}`) != false) {
+                $("#contAudio").append(
+                    `<audio id="Audio" src=${data.soal}>` +
+                    `</audio>` +
+                    `<button id="btnPlay" type="button">Play Audio</button>`
+                );
+                $(`#btnPlay`).on("click", e => {
+                    ReactSession.set(`audio${data.id}`, false)
+                    $(`#Audio`).get(0).play()
+                    e.target.remove()
+                });
+            }
+
         } else {
             $('#soalCOnt').removeClass('d-none')
         }
